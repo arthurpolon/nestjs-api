@@ -4,7 +4,8 @@ services:
       context: .
     env_file: '.env'
     environment:
-      - DB_HOST=postgres
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
     depends_on:
       postgres:
         condition: service_healthy
@@ -14,13 +15,13 @@ services:
     restart: unless-stopped
     env_file: '.env'
     environment:
-      POSTGRES_USER: '${DB_USERNAME}'
-      POSTGRES_PASSWORD: '${DB_PASSWORD}'
-      POSTGRES_DB: '${DB_NAME}'
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - '${DB_PORT}:5432'
+      - '5432:5432'
     healthcheck:
-      test: ['CMD', 'pg_isready']
+      test: ['CMD', 'pg_isready', '-U', '${DATABASE_USERNAME}']
       interval: 10s
       timeout: 5s
       retries: 5

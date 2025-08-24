@@ -25,21 +25,22 @@ export class Env {
   PORT: number;
 
   @IsString()
-  DB_HOST: string;
-
+  DATABASE_HOST: string;
   @IsNumber()
   @Min(0)
   @Max(65535)
-  DB_PORT: number;
+  DATABASE_PORT: number;
+  @IsString()
+  DATABASE_USERNAME: string;
+  @IsString()
+  DATABASE_PASSWORD: string;
+  @IsString()
+  DATABASE_NAME: string;
 
   @IsString()
-  DB_USERNAME: string;
-
+  BETTER_AUTH_SECRET: string;
   @IsString()
-  DB_PASSWORD: string;
-
-  @IsString()
-  DB_NAME: string;
+  BETTER_AUTH_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {
