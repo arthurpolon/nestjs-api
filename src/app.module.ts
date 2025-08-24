@@ -4,10 +4,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { validate } from 'src/config/validator';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import typeorm from 'src/config/typeorm';
-import { AuthGuard, AuthModule } from '@thallesp/nestjs-better-auth';
+import {
+  AuthGuard,
+  AuthModule as BetterAuthModule,
+} from '@thallesp/nestjs-better-auth';
 import { auth } from 'src/config/auth';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from 'src/app.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,7 +27,9 @@ import { AppController } from 'src/app.controller';
       useFactory: (config: ConfigService) => config.get('typeorm')!,
     }),
 
-    AuthModule.forRoot(auth),
+    BetterAuthModule.forRoot(auth),
+
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
