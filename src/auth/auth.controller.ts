@@ -1,14 +1,22 @@
 import { Controller, Get } from '@nestjs/common';
-import { Optional, Session } from '@thallesp/nestjs-better-auth';
+import { Session } from '@thallesp/nestjs-better-auth';
 import type { UserSession } from '@thallesp/nestjs-better-auth';
-import { ApiCookieAuth } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { User } from 'src/auth/dto/user.dto';
 
 @Controller('auth')
-@ApiCookieAuth()
 export class AuthController {
-  @Optional()
+  @ApiOperation({
+    operationId: 'get_whoAmI',
+    summary: 'Get current user information',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User information retrieved successfully',
+    type: User,
+  })
   @Get('whoami')
-  me(@Session() session?: UserSession) {
-    return session?.user;
+  whoAmI(@Session() session: UserSession): User {
+    return session.user;
   }
 }
