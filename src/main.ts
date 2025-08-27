@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import { Env } from 'src/config/validator';
+import { EnvSchema } from 'src/config/validator';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
@@ -27,7 +27,7 @@ async function bootstrap() {
     jsonDocumentUrl: 'swagger/json',
   });
 
-  const configService = app.get(ConfigService<Env>);
+  const configService = app.get(ConfigService<EnvSchema>);
   const port = configService.get('PORT', { infer: true });
 
   await app.listen(port ?? 3001);

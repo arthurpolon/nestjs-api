@@ -1,58 +1,20 @@
-import { plainToInstance } from 'class-transformer';
-import {
-  IsEnum,
-  IsNumber,
-  IsString,
-  Max,
-  Min,
-  validateSync,
-} from 'class-validator';
+import z from 'zod';
 
-enum Environment {
-  Development = 'development',
-  Production = 'production',
-  Test = 'test',
-  Provision = 'provision',
-}
+const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'production', 'test']),
+  PORT: z.coerce.number().min(0).max(65535),
 
-export class Env {
-  @IsEnum(Environment)
-  NODE_ENV: Environment;
+  DATABASE_HOST: z.string(),
+  DATABASE_PORT: z.coerce.number().min(0).max(65535),
+  DATABASE_USER: z.string(),
+  DATABASE_PASSWORD: z.string(),
+  DATABASE_NAME: z.string(),
 
-  @IsNumber()
-  @Min(0)
-  @Max(65535)
-  PORT: number;
-
-  @IsString()
-  DATABASE_HOST: string;
-  @IsNumber()
-  @Min(0)
-  @Max(65535)
-  DATABASE_PORT: number;
-  @IsString()
-  DATABASE_USERNAME: string;
-  @IsString()
-  DATABASE_PASSWORD: string;
-  @IsString()
-  DATABASE_NAME: string;
-
-  @IsString()
-  BETTER_AUTH_SECRET: string;
-  @IsString()
-  BETTER_AUTH_URL: string;
-}
+  BETTER_AUTH_SECRET: z.string(),
+  BETTER_AUTH_URL: z.string(),
+});
+export type EnvSchema = z.infer<typeof envSchema>;
 
 export function validate(config: Record<string, unknown>) {
-  const validatedConfig = plainToInstance(Env, config, {
-    enableImplicitConversion: true,
-  });
-  const errors = validateSync(validatedConfig, {
-    skipMissingProperties: false,
-  });
-
-  if (errors.length > 0) {
-    throw new Error(errors.toString());
-  }
-  return validatedConfig;
+  return envSchema.parse(config);
 }
