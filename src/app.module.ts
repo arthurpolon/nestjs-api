@@ -1,20 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { validate } from 'src/config/validator';
 import { AppController } from 'src/app.controller';
 import { AuthModule } from 'src/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { ConfigifyModule } from '@itgorillaz/configify';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      validate,
-      isGlobal: true,
-    }),
-    AuthModule,
-  ],
+  imports: [ConfigifyModule.forRootAsync(), AuthModule],
   controllers: [AppController],
   providers: [
     AppService,

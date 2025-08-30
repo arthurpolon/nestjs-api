@@ -3,14 +3,13 @@ import { BetterAuthService } from './better-auth.service';
 import { AuthController } from './auth.controller';
 import { HttpAdapterHost } from '@nestjs/core';
 import { toNodeHandler } from 'better-auth/node';
-import { ConfigModule } from '@nestjs/config';
 import { DatabasesModule } from 'src/database/database.module';
 import { BETTER_AUTH_BASE_PATH, TRUSTED_ORIGINS } from 'src/auth/constants';
 import type { Express } from 'express';
 import { json as jsonParser } from 'express';
 
 @Module({
-  imports: [ConfigModule, DatabasesModule],
+  imports: [DatabasesModule],
   providers: [BetterAuthService],
   controllers: [AuthController],
   exports: [BetterAuthService],
@@ -42,6 +41,7 @@ export class AuthModule implements NestModule {
       return handler(req, res);
     });
 
+    // Add JSON body parser after BetterAuth routes
     instance.use(jsonParser());
 
     this.logger.log(

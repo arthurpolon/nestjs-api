@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch --env-file .env",
-    "start:debug": "nest start --debug --watch",
+    "start:debug": "nest start --debug --watch --env-file .env",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "type-check": "tsc --noEmit",
@@ -27,8 +27,8 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@itgorillaz/configify": "^4.0.1",
     "@nestjs/common": "^11.0.1",
-    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",

@@ -1,9 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
-import { EnvSchema } from 'src/config/validator';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -31,9 +29,19 @@ async function bootstrap() {
     jsonDocumentUrl: 'swagger/json',
   });
 
-  const configService = app.get(ConfigService<EnvSchema>);
-  const port = configService.get('PORT', { infer: true });
+  await app.listen(process.env.PORT ?? 3000, () => {
+    const logger = new Logger('Application');
 
-  await app.listen(port ?? 3001);
+    logger.log(
+      `App is running at http://localhost:${process.env.PORT ?? 3000}`,
+    );
+
+    logger.log(
+      `API Swagger is available on http://localhost:${process.env.PORT ?? 3000}/swagger`,
+    );
+    logger.log(
+      `Better-Auth Swagger is available on http://localhost:${process.env.PORT ?? 3000}/api/better-auth/reference`,
+    );
+  });
 }
 void bootstrap();

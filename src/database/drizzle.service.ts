@@ -1,11 +1,10 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Injectable } from '@nestjs/common';
 import * as schema from './schema';
-import { ConfigService } from '@nestjs/config';
-import { EnvSchema } from 'src/config/validator';
+import { DatabaseConfig } from 'src/config/database.config';
 
-const getDrizzle = (configService: ConfigService<EnvSchema>) =>
-  drizzle(configService.getOrThrow('DATABASE_URL', { infer: true }), {
+const getDrizzle = (databaseConfig: DatabaseConfig) =>
+  drizzle(databaseConfig.databaseUrl, {
     schema,
   });
 
@@ -14,7 +13,7 @@ export class DrizzleService {
   client: ReturnType<typeof getDrizzle>;
   schema = schema;
 
-  constructor(private readonly configService: ConfigService<EnvSchema>) {
-    this.client = getDrizzle(this.configService);
+  constructor(private readonly databaseConfig: DatabaseConfig) {
+    this.client = getDrizzle(this.databaseConfig);
   }
 }
