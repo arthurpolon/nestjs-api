@@ -7,8 +7,11 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
+    // Disable body parser beacause of better-auth
+    // Re-enable in AuthModule.configure
     bodyParser: false,
   });
+  app.setGlobalPrefix('api');
 
   app.useGlobalPipes(
     new ValidationPipe({

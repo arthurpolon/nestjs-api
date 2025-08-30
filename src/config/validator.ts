@@ -4,11 +4,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']),
   PORT: z.coerce.number().min(0).max(65535),
 
-  DATABASE_HOST: z.string(),
-  DATABASE_PORT: z.coerce.number().min(0).max(65535),
-  DATABASE_USER: z.string(),
-  DATABASE_PASSWORD: z.string(),
-  DATABASE_NAME: z.string(),
+  DATABASE_URL: z.string(),
 
   BETTER_AUTH_SECRET: z.string(),
   BETTER_AUTH_URL: z.string(),

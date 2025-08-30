@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Public } from '@thallesp/nestjs-better-auth';
+import { Public } from 'src/auth/auth.decorator';
 
 @Controller()
 export class AppController {

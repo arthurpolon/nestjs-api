@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { validate } from 'src/config/validator';
-import { AuthGuard, AuthModule } from '@thallesp/nestjs-better-auth';
-import { auth } from 'src/config/auth';
-import { APP_GUARD } from '@nestjs/core';
 import { AppController } from 'src/app.controller';
+import { AuthModule } from 'src/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Module({
   imports: [
@@ -13,8 +13,7 @@ import { AppController } from 'src/app.controller';
       validate,
       isGlobal: true,
     }),
-
-    AuthModule.forRoot(auth),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
