@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { betterAuth } from 'better-auth';
 import { DrizzleService } from 'src/database/drizzle.service';
-import { bearer } from 'better-auth/plugins';
+import { bearer, openAPI } from 'better-auth/plugins';
 import { BETTER_AUTH_BASE_PATH, TRUSTED_ORIGINS } from 'src/auth/constants';
 
 const getBetterAuth = (drizzleService: DrizzleService) =>
@@ -20,7 +20,7 @@ const getBetterAuth = (drizzleService: DrizzleService) =>
       enabled: false,
     },
     trustedOrigins: TRUSTED_ORIGINS,
-    plugins: [bearer()],
+    plugins: [bearer(), openAPI()],
   });
 
 @Injectable()
