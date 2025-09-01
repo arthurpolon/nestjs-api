@@ -1,98 +1,265 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Docs API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A modern, secure REST API built with NestJS, featuring user authentication, PostgreSQL database integration, and comprehensive API documentation.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **Authentication & Authorization**: Secure authentication using Better-Auth
+- **User Management**: Complete user CRUD operations with validation
+- **Database Integration**: PostgreSQL with Drizzle ORM for type-safe database operations
+- **API Documentation**: Auto-generated Swagger documentation
+- **Data Validation**: Zod schema validation with NestJS integration
+- **Docker Support**: Containerized development environment
+- **TypeScript**: Full TypeScript support with strict typing
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Tech Stack
 
-## Project setup
+- **Framework**: [NestJS](https://nestjs.com/)
+- **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
+- **Authentication**: [Better-Auth](https://www.better-auth.com/)
+- **Validation**: [Zod](https://zod.dev/) with [nestjs-zod](https://github.com/risenforces/nestjs-zod)
+- **Documentation**: [Swagger/OpenAPI](https://swagger.io/)
+- **Containerization**: Docker & Docker Compose
 
-```bash
-$ npm install
-```
+## 📋 Prerequisites
 
-## Compile and run the project
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **PostgreSQL** (or use Docker Compose)
+- **Docker** and **Docker Compose** (optional, for containerized development)
 
-```bash
-# development
-$ npm run start
+## 🚀 Quick Start
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+### 1. Clone the repository
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone <your-repo-url>
+cd docs-api
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Install dependencies
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Environment setup
 
-## Resources
+Create a `.env` file in the root directory:
 
-Check out a few resources that may come in handy when working with NestJS:
+```env
+# Database
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres"
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Application
+PORT=3000
+NODE_ENV=development
 
-## Support
+# Better-Auth Configuration
+BETTER_AUTH_SECRET="your-secret-key-here"
+BETTER_AUTH_BASE_URL="http://localhost:3000"
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 4. Database setup
 
-## Stay in touch
+Start PostgreSQL using Docker Compose:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+docker-compose up postgres -d
+```
 
-## License
+Run database migrations:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+npm run db:migrate
+```
+
+### 5. Start the application
+
+```bash
+# Development mode with hot reload
+npm run start:dev
+
+# Production mode
+npm run start:prod
+```
+
+The API will be available at `http://localhost:3000/api`
+
+## 📚 API Documentation
+
+Once the application is running, you can access:
+
+- **Swagger UI**: `http://localhost:3000/swagger`
+- **OpenAPI JSON**: `http://localhost:3000/swagger/json`
+- **Better-Auth Reference**: `http://localhost:3000/api/better-auth/reference`
+
+## 🐳 Docker Development
+
+### Using Docker Compose
+
+```bash
+# Start all services (API + PostgreSQL)
+docker-compose up
+
+# Start only PostgreSQL
+docker-compose up postgres -d
+
+# Build and run the API container
+npm run docker:build
+npm run docker:run
+```
+
+## 🗄️ Database Operations
+
+```bash
+# Generate migration files
+npm run db:generate
+
+# Push schema changes to database
+npm run db:push
+
+# Run migrations
+npm run db:migrate
+
+# Open Drizzle Studio (Database GUI)
+npm run db:studio
+```
+
+## 🧪 Testing
+
+```bash
+# Run unit tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run end-to-end tests
+npm run test:e2e
+
+# Generate test coverage report
+npm run test:cov
+
+# Run tests in debug mode
+npm run test:debug
+```
+
+## 🔧 Development Tools
+
+```bash
+# Format code with Prettier
+npm run format
+
+# Lint code with ESLint
+npm run lint
+
+# Type checking
+npm run type-check
+
+# Build the project
+npm run build
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── auth/                 # Authentication module
+│   ├── auth.controller.ts
+│   ├── auth.guard.ts
+│   ├── auth.module.ts
+│   └── better-auth.service.ts
+├── config/               # Configuration files
+│   ├── app.config.ts
+│   ├── better-auth.config.ts
+│   └── database.config.ts
+├── database/             # Database configuration and schema
+│   ├── database.module.ts
+│   ├── database.schema.ts
+│   ├── drizzle.service.ts
+│   └── migrations/
+├── user/                 # User management module
+│   ├── user.controller.ts
+│   ├── user.service.ts
+│   ├── user.module.ts
+│   └── dto/
+├── app.controller.ts     # Main application controller
+├── app.module.ts         # Root application module
+├── app.service.ts        # Main application service
+├── main.ts               # Application entry point
+└── zod.exception.ts      # Custom Zod exception filter
+```
+
+## 🔐 Authentication
+
+This API uses Better-Auth for authentication. Key features:
+
+- **Session-based authentication**
+- **Bearer token support**
+- **User registration and login**
+- **Protected routes with `@ApiBearerAuth()` decorator**
+- **Public routes with `@Public()` decorator**
+
+## 📖 API Endpoints
+
+### Authentication
+- `GET /api/auth/user` - Get current authenticated user
+
+### Users
+- `GET /api/user` - Get all users
+- `POST /api/user` - Create a new user
+- `GET /api/user/:id` - Get user by ID
+
+For detailed API documentation, visit the Swagger UI at `/swagger` when the application is running.
+
+## 🌍 Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string | - |
+| `PORT` | Application port | `3000` |
+| `NODE_ENV` | Environment mode | `development` |
+| `BETTER_AUTH_SECRET` | Secret key for Better-Auth | - |
+| `BETTER_AUTH_BASE_URL` | Base URL for authentication | `http://localhost:3000` |
+
+## 🚢 Deployment
+
+### Production Build
+
+```bash
+# Build the application
+npm run build
+
+# Start in production mode
+npm run start:prod
+```
+
+### Docker Production
+
+```bash
+# Build the Docker image
+docker build -t docs-api .
+
+# Run the container
+docker run --env-file .env -p 3000:3000 docs-api
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the UNLICENSED License.
+
+## 🔗 Useful Links
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Better-Auth Documentation](https://www.better-auth.com/docs)
+- [Drizzle ORM Documentation](https://orm.drizzle.team/docs/overview)
+- [Zod Documentation](https://zod.dev/)
