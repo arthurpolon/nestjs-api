@@ -8,6 +8,13 @@
       "when": 1756524044141,
       "tag": "0000_amusing_moira_mactaggert",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1756759176993,
+      "tag": "0001_optimal_mauler",
+      "breakpoints": true
     }
   ]
 }

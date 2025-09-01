@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Injectable } from '@nestjs/common';
-import { schema } from './database.schema';
 import { DatabaseConfig } from 'src/config/database.config';
+import * as schema from 'src/database/database.schema';
 
 const getDrizzle = (databaseConfig: DatabaseConfig) =>
   drizzle(databaseConfig.databaseUrl, {
