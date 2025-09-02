@@ -15,6 +15,13 @@
       "when": 1756759176993,
       "tag": "0001_optimal_mauler",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756776089676,
+      "tag": "0002_material_hex",
+      "breakpoints": true
     }
   ]
 }
